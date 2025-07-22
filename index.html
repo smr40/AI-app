@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Video Generator</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 30px; background-color: #f0f0f0; }
+        form { margin-bottom: 20px; }
+        input, textarea { padding: 10px; width: 300px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🧠 AI Video Generator</h1>
+
+    <form action="/generate" method="POST" enctype="multipart/form-data">
+        <textarea name="text" placeholder="Enter your script..." required></textarea><br>
+        <input type="file" name="image" accept="image/*" required><br>
+        <input type="submit" value="Generate Video">
+    </form>
+
+    {% if video_file %}
+        <h2>Your Generated Video:</h2>
+        <video width="480" controls>
+            <source src="{{ url_for('serve_video', filename=video_file) }}" type="video/mp4">
+        </video>
+        <p><a href="{{ url_for('serve_video', filename=video_file) }}" download>Download Video</a></p>
+    {% endif %}
+</body>
+</html>
+
+
